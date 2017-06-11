@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import com.services.UserService;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author leyla
@@ -55,5 +56,10 @@ public class UserServiceImpl implements UserService {
             User user = userDAO.getById(id);
             userDAO.delete(user);
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userDAO.getAll();
     }
 }

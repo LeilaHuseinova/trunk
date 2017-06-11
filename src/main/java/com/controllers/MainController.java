@@ -2,6 +2,7 @@ package com.controllers;
 
 import com.exceptions.UserAlreadyExistsException;
 import com.model.dto.ErrorDTO;
+import com.model.entities.User;
 import com.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.services.UserService;
+
+import java.util.List;
 
 /**
  * @author leyla
@@ -46,5 +49,11 @@ public class MainController {
     @ResponseBody
     public void deleteUser(@RequestParam Long id) {
         userService.delete(id);
+    }
+
+    @RequestMapping("/users")
+    @ResponseBody
+    public List<User> getAllUsers() {
+        return userService.getAll();
     }
 }

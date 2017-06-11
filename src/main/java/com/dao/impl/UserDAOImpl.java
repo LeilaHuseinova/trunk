@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * @author leyla
@@ -46,5 +47,14 @@ public class UserDAOImpl implements UserDAO {
         if(user != null) {
             em.remove(em.contains(user) ? user : em.merge(user));
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        CriteriaQuery<User> criteria = em.getCriteriaBuilder().createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root);
+        criteria.distinct(true);
+        return em.createQuery(criteria).getResultList();
     }
 }
